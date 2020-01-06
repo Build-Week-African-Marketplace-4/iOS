@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="86X-So-uh2">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,30 +17,62 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="5zL-M0-PEL" detailTextLabel="iZ5-ZR-4Ph" style="IBUITableViewCellStyleValue1" id="iRp-SH-erA">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ItemCell" rowHeight="87" id="iRp-SH-erA" customClass="ItemTableViewCell" customModule="AfricanMarketplace" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="87"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iRp-SH-erA" id="yWl-bE-oXY">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="87"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5zL-M0-PEL">
-                                            <rect key="frame" x="20" y="12" width="33.5" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iZ5-ZR-4Ph">
-                                            <rect key="frame" x="350" y="12" width="44" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gRk-tI-eOD">
+                                            <rect key="frame" x="20" y="11" width="374" height="20.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZqX-I0-dpX">
+                                                    <rect key="frame" x="0.0" y="0.0" width="327" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9YE-1Q-yHS">
+                                                    <rect key="frame" x="335" y="0.0" width="39" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="282" translatesAutoresizingMaskIntoConstraints="NO" id="SsE-og-7E7">
+                                            <rect key="frame" x="20" y="55.5" width="374" height="20.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7eb-Cg-J8V">
+                                                    <rect key="frame" x="0.0" y="0.0" width="30.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Kl-Hq-eLG">
+                                                    <rect key="frame" x="312.5" y="0.0" width="61.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="gRk-tI-eOD" firstAttribute="leading" secondItem="yWl-bE-oXY" secondAttribute="leadingMargin" id="VBp-b5-Gbm"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="gRk-tI-eOD" secondAttribute="trailing" id="XXy-wl-Nlo"/>
+                                        <constraint firstItem="gRk-tI-eOD" firstAttribute="top" secondItem="yWl-bE-oXY" secondAttribute="topMargin" id="rzA-f5-5p1"/>
+                                        <constraint firstItem="SsE-og-7E7" firstAttribute="leading" secondItem="yWl-bE-oXY" secondAttribute="leadingMargin" id="vwi-mC-OMI"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="SsE-og-7E7" secondAttribute="bottom" id="wjC-ok-119"/>
+                                        <constraint firstItem="SsE-og-7E7" firstAttribute="trailing" secondItem="yWl-bE-oXY" secondAttribute="trailingMargin" id="yf5-0W-yrR"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="itemCity" destination="7eb-Cg-J8V" id="Cdc-F7-vkD"/>
+                                    <outlet property="itemCountry" destination="2Kl-Hq-eLG" id="cNh-a7-Ydf"/>
+                                    <outlet property="itemName" destination="ZqX-I0-dpX" id="ik9-cA-j0F"/>
+                                    <outlet property="itemPrice" destination="9YE-1Q-yHS" id="qDn-EJ-lvb"/>
                                     <segue destination="Oym-kT-mua" kind="show" identifier="ItemDetailShowSegue" id="Vcf-OQ-Qzw"/>
                                 </connections>
                             </tableViewCell>
@@ -67,7 +100,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ueh-8i-qKt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="899" y="105"/>
+            <point key="canvasLocation" x="898.55072463768124" y="104.46428571428571"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="eUf-4D-Alw">
@@ -180,8 +213,20 @@
                         <viewLayoutGuide key="safeArea" id="f3f-zI-b9o"/>
                     </view>
                     <navigationItem key="navigationItem" id="Zsf-ab-4E1">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="jQD-Fo-vu9"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="jQD-Fo-vu9">
+                            <connections>
+                                <action selector="saveTapped:" destination="Oym-kT-mua" id="k1z-zX-ygG"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="categoryPicker" destination="r2V-zC-HYY" id="tpI-oJ-5Ay"/>
+                        <outlet property="cityTextField" destination="Pvp-t6-MtI" id="Jy7-01-QcI"/>
+                        <outlet property="countryTextField" destination="o8U-2y-eyE" id="Ff9-wK-ALw"/>
+                        <outlet property="descriptionTextField" destination="qsX-Qu-j7y" id="O13-Rh-f3y"/>
+                        <outlet property="nameTextField" destination="usn-oi-cvP" id="ZqG-mQ-Fg8"/>
+                        <outlet property="priceTextField" destination="reN-fr-olM" id="qor-qV-jAt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z4z-UP-LWP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -204,6 +249,9 @@
                                             <segment title="Sign Up"/>
                                             <segment title="Sign In"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="signInUpChanged:" destination="vOT-yb-bZ9" eventType="valueChanged" id="SR7-g9-nKi"/>
+                                        </connections>
                                     </segmentedControl>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fm6-is-oCe">
                                         <rect key="frame" x="8" y="56" width="398" height="48"/>
@@ -219,6 +267,9 @@
                                         <rect key="frame" x="164" y="168" width="86" height="48"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="signInUpButtonTapped:" destination="vOT-yb-bZ9" eventType="touchUpInside" id="MAs-iy-Ysd"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -237,6 +288,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="U6K-WJ-fiJ"/>
                     </view>
+                    <connections>
+                        <outlet property="passwordTextField" destination="FI2-MZ-L7v" id="ijg-Kf-QLR"/>
+                        <outlet property="signInUpButton" destination="Y5Z-MZ-lIL" id="H1r-oD-2fN"/>
+                        <outlet property="signInUpSegmentedControl" destination="AlI-Sk-MyC" id="knt-Br-onA"/>
+                        <outlet property="usernameTextField" destination="fm6-is-oCe" id="JTK-3f-Y5W"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lWq-C6-LxG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -26,6 +26,8 @@ class UserController {
     private let baseURL = URL(string: "https://africanmarket2.herokuapp.com/")!
     
     var userInfo: [UserInfo] = []
+    var authToken: AuthToken?
+    var items: [Item] = []
     
     func signUp(with user: User, completion: @escaping (Error?) -> ()) {
         
@@ -97,7 +99,7 @@ class UserController {
             
             let decoder = JSONDecoder()
             do {
-                self.userInfo = try decoder.decode(userInfo.self, from: data)
+                self.authToken = try decoder.decode(AuthToken.self, from: data)
             } catch {
                 print("Error decoding user info \(error)")
                 completion(error)
@@ -110,5 +112,83 @@ class UserController {
         }.resume()
     }
     
+    func fetchUserInfo(completion: @escaping (Result<[UserInfo], NetworkError>) -> Void) {
+        guard let token = authToken else {
+            completion(.failure(.noAuth))
+            return
+        }
+
+        let userInfoURL = baseURL.appendingPathComponent("api/users/:id")
+
+        var request = URLRequest(url: userInfoURL)
+        request.httpMethod = HTTPMethod.get.rawValue
+        request.addValue("Bearer \(token.token)", forHTTPHeaderField: "Authorization")
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let response = response as? HTTPURLResponse,
+            response.statusCode == 401 {
+                completion(.failure(.badAuth))
+                return
+            }
+
+            if let error = error {
+                print("Error receiving User Info data: \(error)")
+                completion(.failure(.otherError))
+            }
+
+            guard let data = data else {
+                completion(.failure(.badData))
+                return
+            }
+
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            do {
+                let userInfo = try decoder.decode([UserInfo].self, from: data)
+                self.userInfo = userInfo
+                completion(.success(userInfo))
+            } catch {
+                print("Error decoding [UserInfo] object: \(error)")
+                completion(.failure(.noDecode))
+            }
+        }.resume()
+    }
     
+    
+    func fetchItems(completion: @escaping (Result<[Item], NetworkError>) -> Void) {
+
+        let itemsURL = baseURL.appendingPathComponent("api/item")
+
+        var request = URLRequest(url: itemsURL)
+        request.httpMethod = HTTPMethod.get.rawValue
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let response = response as? HTTPURLResponse,
+            response.statusCode == 401 {
+                completion(.failure(.badAuth))
+                return
+            }
+
+            if let error = error {
+                print("Error receiving item data: \(error)")
+                completion(.failure(.otherError))
+            }
+
+            guard let data = data else {
+                completion(.failure(.badData))
+                return
+            }
+
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            do {
+                let items = try decoder.decode([Item].self, from: data)
+                self.items = items
+                completion(.success(items))
+            } catch {
+                print("Error decoding [UserInfo] object: \(error)")
+                completion(.failure(.noDecode))
+            }
+        }.resume()
+    }
 }

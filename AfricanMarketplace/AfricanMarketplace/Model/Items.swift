@@ -8,12 +8,13 @@
 
 import Foundation
 
-struct Items: Codable {
+struct Item: Codable {
     let id: Int
     let name: String
     let description: String
     let price: UInt
     let city: String
+    let country: String
     let user_id: String
     let favorited: Bool
     let categories: [Category]

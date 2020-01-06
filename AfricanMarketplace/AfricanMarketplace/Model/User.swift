@@ -19,5 +19,5 @@ struct UserInfo: Codable {
     let last_name: String
     let username: String
     let email: String
-    let item: [Items]
+    let item: [Item]
 }

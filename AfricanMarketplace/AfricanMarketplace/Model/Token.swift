@@ -1,5 +1,5 @@
 //
-//  ItemController.swift
+//  Token.swift
 //  AfricanMarketplace
 //
 //  Created by Patrick Millet on 1/6/20.
@@ -8,3 +8,6 @@
 
 import Foundation
 
+struct AuthToken: Codable {
+    let token: String
+}

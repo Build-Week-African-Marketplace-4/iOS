@@ -13,13 +13,14 @@
 		DB26485123C38E090053E015 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB26485023C38E090053E015 /* Assets.xcassets */; };
 		DB26485423C38E090053E015 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB26485223C38E090053E015 /* LaunchScreen.storyboard */; };
 		DB26486423C39EBF0053E015 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26486323C39EBF0053E015 /* User.swift */; };
-		DB26486723C39FFE0053E015 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26486623C39FFE0053E015 /* LoginScreenViewController.swift */; };
 		DB26486923C3A0D70053E015 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26486823C3A0D70053E015 /* Items.swift */; };
 		DB26486B23C3A1B80053E015 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26486A23C3A1B80053E015 /* UserController.swift */; };
-		DB26486D23C3A1C10053E015 /* ItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26486C23C3A1C10053E015 /* ItemController.swift */; };
 		DB26486F23C3AACE0053E015 /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26486E23C3AACE0053E015 /* ItemsViewController.swift */; };
 		DB26487123C3AAE10053E015 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26487023C3AAE10053E015 /* SearchViewController.swift */; };
 		DB26487323C3AB040053E015 /* MarketplaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26487223C3AB040053E015 /* MarketplaceTableViewController.swift */; };
+		DB26487523C3ADBA0053E015 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26487423C3ADBA0053E015 /* Token.swift */; };
+		DB26487723C3B2490053E015 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26487623C3B2490053E015 /* LoginScreenViewController.swift */; };
+		DB26487923C3B78C0053E015 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26487823C3B78C0053E015 /* ItemTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,13 +32,14 @@
 		DB26485323C38E090053E015 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB26485523C38E090053E015 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB26486323C39EBF0053E015 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		DB26486623C39FFE0053E015 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		DB26486823C3A0D70053E015 /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
 		DB26486A23C3A1B80053E015 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
-		DB26486C23C3A1C10053E015 /* ItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemController.swift; sourceTree = "<group>"; };
 		DB26486E23C3AACE0053E015 /* ItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
 		DB26487023C3AAE10053E015 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		DB26487223C3AB040053E015 /* MarketplaceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketplaceTableViewController.swift; sourceTree = "<group>"; };
+		DB26487423C3ADBA0053E015 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		DB26487623C3B2490053E015 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
+		DB26487823C3B78C0053E015 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,10 +96,11 @@
 		DB26485D23C39DD40053E015 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				DB26486623C39FFE0053E015 /* LoginScreenViewController.swift */,
 				DB26486E23C3AACE0053E015 /* ItemsViewController.swift */,
 				DB26487023C3AAE10053E015 /* SearchViewController.swift */,
 				DB26487223C3AB040053E015 /* MarketplaceTableViewController.swift */,
+				DB26487623C3B2490053E015 /* LoginScreenViewController.swift */,
+				DB26487823C3B78C0053E015 /* ItemTableViewCell.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -106,7 +109,6 @@
 			isa = PBXGroup;
 			children = (
 				DB26486A23C3A1B80053E015 /* UserController.swift */,
-				DB26486C23C3A1C10053E015 /* ItemController.swift */,
 			);
 			path = "Model Controllers";
 			sourceTree = "<group>";
@@ -116,6 +118,7 @@
 			children = (
 				DB26486323C39EBF0053E015 /* User.swift */,
 				DB26486823C3A0D70053E015 /* Items.swift */,
+				DB26487423C3ADBA0053E015 /* Token.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -191,15 +194,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB26486D23C3A1C10053E015 /* ItemController.swift in Sources */,
 				DB26486B23C3A1B80053E015 /* UserController.swift in Sources */,
 				DB26484823C38E090053E015 /* AppDelegate.swift in Sources */,
 				DB26487123C3AAE10053E015 /* SearchViewController.swift in Sources */,
 				DB26486923C3A0D70053E015 /* Items.swift in Sources */,
 				DB26484A23C38E090053E015 /* SceneDelegate.swift in Sources */,
 				DB26486F23C3AACE0053E015 /* ItemsViewController.swift in Sources */,
-				DB26486723C39FFE0053E015 /* LoginScreenViewController.swift in Sources */,
+				DB26487523C3ADBA0053E015 /* Token.swift in Sources */,
 				DB26486423C39EBF0053E015 /* User.swift in Sources */,
+				DB26487723C3B2490053E015 /* LoginScreenViewController.swift in Sources */,
+				DB26487923C3B78C0053E015 /* ItemTableViewCell.swift in Sources */,
 				DB26487323C3AB040053E015 /* MarketplaceTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

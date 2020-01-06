@@ -10,21 +10,56 @@ import UIKit
 
 class ItemsViewController: UIViewController {
 
+    //MARK: - Outlets
+    
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var descriptionTextField: UITextField!
+    @IBOutlet weak var priceTextField: UITextField!
+    @IBOutlet weak var cityTextField: UITextField!
+    @IBOutlet weak var countryTextField: UITextField!
+    @IBOutlet weak var categoryPicker: UIPickerView!
+    
+    //MARK: - Properties
+    
+    var item: Item? {
+        didSet {
+            updateViews()
+        }
+    }
+    
+    var apiController: UserController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    //MARK: - Actions
+    @IBAction func saveTapped(_ sender: Any) {
+        guard let apiController = apiController,
+            let name = nameTextField.text,
+            let description = descriptionTextField.text,
+            let price = priceTextField.text,
+            let city = cityTextField.text,
+            let country = countryTextField.text,
+            let category = categoryPicker.
     }
-    */
+    
+    
+    //MARK: - Methods
+    
+    private func updateViews() {
+        nameTextField.text = item?.name
+        descriptionTextField.text = item?.description
+        priceTextField.text = String(item?.price)
+        cityTextField.text = item?.city
+        countryTextField.text = item?.country
+        
+    }
+}
 
+extension ItemsViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        <#code#>
+    }
 }
