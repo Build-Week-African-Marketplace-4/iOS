@@ -9,19 +9,19 @@
 import Foundation
 
 struct Item: Codable {
-    let id: Int
-    let name: String
-    let description: String
-    let price: UInt
-    let city: String
-    let country: String
-    let user_id: String
-    let favorited: Bool
-    let categories: [Category]
+    var id: Int
+    var name: String
+    var description: String
+    var price: String
+    var city: String
+    var country: String
+    var user_id: String
+    var favorited: Bool
+    var categories: [Category]
 }
 
 struct Category: Codable {
-    let id: Int
-    let type: String
-    let item_id: String
+    var id: Int
+    var type: String
+    var item_id: String
 }

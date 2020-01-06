@@ -17,11 +17,17 @@ class ItemsViewController: UIViewController {
     @IBOutlet weak var priceTextField: UITextField!
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var countryTextField: UITextField!
-    @IBOutlet weak var categoryPicker: UIPickerView!
+    @IBOutlet weak var categoryTextField: UITextField!
     
     //MARK: - Properties
     
     var item: Item? {
+        didSet {
+            updateViews()
+        }
+    }
+    
+    var categoryObj: Category? {
         didSet {
             updateViews()
         }
@@ -35,14 +41,25 @@ class ItemsViewController: UIViewController {
     }
     
     //MARK: - Actions
-    @IBAction func saveTapped(_ sender: Any) {
+    @IBAction func saveTapped(_ sender: UIBarButtonItem) {
         guard let apiController = apiController,
             let name = nameTextField.text,
             let description = descriptionTextField.text,
             let price = priceTextField.text,
             let city = cityTextField.text,
             let country = countryTextField.text,
-            let category = categoryPicker.
+            let category = categoryTextField.text
+            else { return }
+        
+        if var item = item, var unwrappedCategory = categoryObj {
+            item.name = name
+            item.description = description
+            item.price = price
+            item.city = city
+            item.country = country
+            unwrappedCategory.type = category
+//            apiController.sendItemToServer(item: item)
+        }
     }
     
     
@@ -51,15 +68,9 @@ class ItemsViewController: UIViewController {
     private func updateViews() {
         nameTextField.text = item?.name
         descriptionTextField.text = item?.description
-        priceTextField.text = String(item?.price)
+        priceTextField.text = item?.price
         cityTextField.text = item?.city
         countryTextField.text = item?.country
         
-    }
-}
-
-extension ItemsViewController: UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        <#code#>
     }
 }

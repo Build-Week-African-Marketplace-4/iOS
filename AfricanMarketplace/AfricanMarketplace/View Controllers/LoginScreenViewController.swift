@@ -12,14 +12,14 @@ enum LoginType {
     case signUp
     case signIn
 }
-
 class LoginScreenViewController: UIViewController {
-
-    //MARK: - Outlets
+    
+    //MARK: - Outlets    
     
     @IBOutlet weak var signInUpSegmentedControl: UISegmentedControl!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var signInUpButton: UIButton!
     
     //MARK: - Properties
@@ -32,6 +32,8 @@ class LoginScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        signInUpButton.setTitle("Sign Up", for: .normal)
+        self.signInUpSegmentedControl.selectedSegmentIndex = 0
     }
     
     //MARK: - Actions
@@ -40,8 +42,9 @@ class LoginScreenViewController: UIViewController {
         guard let apiController = apiController else { return }
             
             if let username = usernameTextField.text, !username.isEmpty,
-                let password = passwordTextField.text, !password.isEmpty {
-                let user = User(username: username, password: password)
+                let password = passwordTextField.text, !password.isEmpty,
+                let email = emailTextField.text {
+                let user = User(username: username, password: password, email: email)
             
             if loginType == .signUp {
                 apiController.signUp(with: user) { (error) in
@@ -59,6 +62,7 @@ class LoginScreenViewController: UIViewController {
                     }
                 }
             } else {
+                emailTextField.isHidden = true
                 apiController.signIn(with: user) { (error) in
                     if let error = error {
                         print("Error occured during sign in: \(error)")
@@ -66,6 +70,7 @@ class LoginScreenViewController: UIViewController {
                         self.dismiss(animated: true, completion: nil)
                     }
                 }
+                
             }
         }
     }

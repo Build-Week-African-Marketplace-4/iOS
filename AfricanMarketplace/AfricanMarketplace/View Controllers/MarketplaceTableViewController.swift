@@ -59,14 +59,21 @@ class MarketplaceTableViewController: UITableViewController {
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ItemDetailShowSegue" {
-            if let detailVC = segue.destination as? ItemsViewController,
-                let indexPath = tableView.indexPathForSelectedRow {
-                detailVC.apiController = apiController
+        switch segue.identifier {
+        case "LoginSegue":
+            if let loginVC = segue.destination as? LoginScreenViewController {
+                loginVC.apiController = apiController
             }
+        case "AddItemShowSegue":
+            if let loginVC = segue.destination as? ItemsViewController {
+                loginVC.apiController = apiController
+            }
+        case "ItemDetailShowDegue":
+            if let loginVC = segue.destination as? ItemsViewController {
+                loginVC.apiController = apiController
+            }
+        default:
+            return
         }
-    
     }
-    
-
 }
