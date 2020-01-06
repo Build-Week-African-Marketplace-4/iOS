@@ -29,7 +29,7 @@ class UserController {
     
     func signUp(with user: User, completion: @escaping (Error?) -> ()) {
         
-        let signUpUrl = baseURL.appendingPathComponent("users/signup")
+        let signUpUrl = baseURL.appendingPathComponent("api/auth/register")
         
         var request = URLRequest(url: signUpUrl)
         request.httpMethod = HTTPMethod.post.rawValue
@@ -63,7 +63,7 @@ class UserController {
     
     func signIn(with user: User, completion: @escaping (Error?) -> ()) {
         
-        let signInUrl = baseURL.appendingPathComponent("users/login")
+        let signInUrl = baseURL.appendingPathComponent("api/auth/login")
         
         var request = URLRequest(url: signInUrl)
         request.httpMethod = HTTPMethod.post.rawValue
