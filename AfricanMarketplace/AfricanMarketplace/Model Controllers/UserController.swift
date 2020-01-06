@@ -87,7 +87,7 @@ class UserController {
                 return
             }
             
-            if let response = response as? HTTPURLResponse, response.statusCode != 200 {
+            if let response = response as? HTTPURLResponse, response.statusCode != 201 {
                 completion(NSError(domain: "", code: response.statusCode, userInfo: nil))
                 return
             }
@@ -192,5 +192,49 @@ class UserController {
         }.resume()
     }
     
-    
+    func sendItemToServer(item: Item, completion: @escaping (Error?) -> ()) {
+        guard let authToken = authToken else {
+            print("Error Authenticating")
+            completion(nil)
+            return
+        }
+        
+        let itemURL = baseURL.appendingPathComponent("api/item")
+        
+        var request = URLRequest(url: itemURL)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.addValue("Bearer \(authToken.token)", forHTTPHeaderField: "Authorization")
+        
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        do {
+            let newItem = try encoder.encode(item)
+            request.httpBody = newItem
+        } catch {
+            print("Error encoding item object: \(error)")
+            completion(nil)
+            return
+        }
+
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            if let response = response as? HTTPURLResponse,
+            response.statusCode == 401 {
+                print("Bad Auth")
+                completion(nil)
+                return
+            }
+
+            if let error = error {
+                print("Error receiving item data: \(error)")
+                completion(nil)
+                return
+            } else {
+                self.fetchItems { result in
+                }
+            }
+        }.resume()
+        
+    }
 }

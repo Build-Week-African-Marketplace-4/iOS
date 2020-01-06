@@ -58,7 +58,11 @@ class ItemsViewController: UIViewController {
             item.city = city
             item.country = country
             unwrappedCategory.type = category
-//            apiController.sendItemToServer(item: item)
+            apiController.sendItemToServer(item: item) { (error) in
+                if let error = error {
+                    print("Error adding new item \(error)")
+                }
+            }
         }
     }
     
