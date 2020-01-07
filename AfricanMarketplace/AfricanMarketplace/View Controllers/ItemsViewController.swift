@@ -47,17 +47,16 @@ class ItemsViewController: UIViewController {
             let description = descriptionTextField.text,
             let price = priceTextField.text,
             let city = cityTextField.text,
-            let country = countryTextField.text,
-            let category = categoryTextField.text
+            let country = countryTextField.text
             else { return }
         
-        if var item = item, var unwrappedCategory = categoryObj {
+        if var item = item {
             item.name = name
             item.description = description
             item.price = price
             item.city = city
             item.country = country
-            unwrappedCategory.type = category
+            item.description = description
             apiController.sendItemToServer(item: item) { (error) in
                 if let error = error {
                     print("Error adding new item \(error)")

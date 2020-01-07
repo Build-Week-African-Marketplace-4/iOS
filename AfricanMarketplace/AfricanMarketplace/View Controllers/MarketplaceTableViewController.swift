@@ -24,7 +24,7 @@ class MarketplaceTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if apiController.authToken == nil {
+        if apiController.token == nil {
             performSegue(withIdentifier: "LoginSegue", sender: self)
         } else {
             apiController.fetchItems { (result) in

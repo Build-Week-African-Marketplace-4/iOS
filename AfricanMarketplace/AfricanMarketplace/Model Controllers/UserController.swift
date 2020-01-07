@@ -25,8 +25,8 @@ class UserController {
     
     private let baseURL = URL(string: "https://africanmarket2.herokuapp.com/")!
     
-    var userInfo: [UserInfo] = []
-    var authToken: AuthToken?
+    var users: [User] = []
+    var token: AuthToken?
     var items: [Item] = []
     
     func signUp(with user: User, completion: @escaping (Error?) -> ()) {
@@ -53,7 +53,7 @@ class UserController {
                 return
             }
             
-            if let response = response as? HTTPURLResponse, response.statusCode != 200 {
+            if let response = response as? HTTPURLResponse, response.statusCode != 201 {
                 completion(NSError(domain: "", code: response.statusCode, userInfo: nil))
                 return
             }
@@ -87,7 +87,7 @@ class UserController {
                 return
             }
             
-            if let response = response as? HTTPURLResponse, response.statusCode != 201 {
+            if let response = response as? HTTPURLResponse, response.statusCode != 200 {
                 completion(NSError(domain: "", code: response.statusCode, userInfo: nil))
                 return
             }
@@ -99,7 +99,7 @@ class UserController {
             
             let decoder = JSONDecoder()
             do {
-                self.authToken = try decoder.decode(AuthToken.self, from: data)
+                self.token = try decoder.decode(AuthToken.self, from: data)
             } catch {
                 print("Error decoding user info \(error)")
                 completion(error)
@@ -112,8 +112,8 @@ class UserController {
         }.resume()
     }
     
-    func fetchUserInfo(completion: @escaping (Result<[UserInfo], NetworkError>) -> Void) {
-        guard let token = authToken else {
+    func fetchUsers(completion: @escaping (Result<[User], NetworkError>) -> Void) {
+        guard let token = token else {
             completion(.failure(.noAuth))
             return
         }
@@ -144,8 +144,8 @@ class UserController {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
             do {
-                let userInfo = try decoder.decode([UserInfo].self, from: data)
-                self.userInfo = userInfo
+                let userInfo = try decoder.decode([User].self, from: data)
+                self.users = userInfo
                 completion(.success(userInfo))
             } catch {
                 print("Error decoding [UserInfo] object: \(error)")
@@ -193,7 +193,7 @@ class UserController {
     }
     
     func sendItemToServer(item: Item, completion: @escaping (Error?) -> ()) {
-        guard let authToken = authToken else {
+        guard let token = token else {
             print("Error Authenticating")
             completion(nil)
             return
@@ -203,7 +203,7 @@ class UserController {
         
         var request = URLRequest(url: itemURL)
         request.httpMethod = HTTPMethod.post.rawValue
-        request.addValue("Bearer \(authToken.token)", forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer \(token.token)", forHTTPHeaderField: "Authorization")
         
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
