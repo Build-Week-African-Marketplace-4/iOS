@@ -94,6 +94,20 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Nsg-oh-LjT">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <attributedString key="attributedTitle">
+                            <fragment content="Fetching Items">
+                                <attributes>
+                                    <font key="NSFont" metaFont="message" size="11"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <connections>
+                            <action selector="refresh:" destination="DuW-aa-ddg" eventType="valueChanged" id="PnF-md-lmh"/>
+                        </connections>
+                    </refreshControl>
                     <connections>
                         <segue destination="vOT-yb-bZ9" kind="presentation" identifier="LoginSegue" id="UMX-C8-fz8"/>
                     </connections>

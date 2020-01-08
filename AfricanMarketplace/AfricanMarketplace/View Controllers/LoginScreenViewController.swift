@@ -80,6 +80,7 @@ class LoginScreenViewController: UIViewController {
             loginType = .signUp
             signInUpButton.setTitle("Sign Up", for: .normal)
         } else {
+            emailTextField.isHidden = true
             loginType = .signIn
             signInUpButton.setTitle("Sign In", for: .normal)
             }

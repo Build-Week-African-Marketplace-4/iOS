@@ -36,6 +36,13 @@ class MarketplaceTableViewController: UITableViewController {
     }
     
 
+    @IBAction func refresh(_ sender: Any) {
+        apiController.fetchItems() { _ in
+            DispatchQueue.main.async {
+                self.refreshControl?.endRefreshing()
+            }
+        }
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
