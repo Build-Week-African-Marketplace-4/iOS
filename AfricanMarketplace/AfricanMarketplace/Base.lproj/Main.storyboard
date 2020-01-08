@@ -220,6 +220,7 @@
                         <outlet property="descriptionTextField" destination="qsX-Qu-j7y" id="O13-Rh-f3y"/>
                         <outlet property="nameTextField" destination="usn-oi-cvP" id="ZqG-mQ-Fg8"/>
                         <outlet property="priceTextField" destination="reN-fr-olM" id="qor-qV-jAt"/>
+                        <outlet property="saveButton" destination="jQD-Fo-vu9" id="Se8-0l-hTw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z4z-UP-LWP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

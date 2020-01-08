@@ -11,7 +11,8 @@ import Foundation
 struct Item: Codable {
     var name: String
     var description: String
-    var price: String
+    var price: Int
     var city: String
     var country: String
+    var user_id: Int? = 1
 }

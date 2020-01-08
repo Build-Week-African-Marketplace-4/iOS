@@ -26,7 +26,7 @@ class UserController {
     private let baseURL = URL(string: "https://africanmarket2.herokuapp.com/")!
     
     var users: [User] = []
-    var token: AuthToken?
+    var token: Token?
     var items: [Item] = []
     
     func signUp(with user: User, completion: @escaping (Error?) -> ()) {
@@ -53,7 +53,7 @@ class UserController {
                 return
             }
             
-            if let response = response as? HTTPURLResponse, response.statusCode != 201 {
+            if let response = response as? HTTPURLResponse, response.statusCode != 201 || response.statusCode != 200 {
                 completion(NSError(domain: "", code: response.statusCode, userInfo: nil))
                 return
             }
@@ -99,7 +99,7 @@ class UserController {
             
             let decoder = JSONDecoder()
             do {
-                self.token = try decoder.decode(AuthToken.self, from: data)
+                self.token = try decoder.decode(Token.self, from: data)
             } catch {
                 print("Error decoding user info \(error)")
                 completion(error)
@@ -186,7 +186,7 @@ class UserController {
                 self.items = items
                 completion(.success(items))
             } catch {
-                print("Error decoding [UserInfo] object: \(error)")
+                print("Error decoding item object: \(error)")
                 completion(.failure(.noDecode))
             }
         }.resume()
@@ -237,4 +237,49 @@ class UserController {
         }.resume()
         
     }
+    
+    func add(item: Item, completion: @escaping (Error?) -> ()) {
+           guard let token = token else {
+               print("No Auth")
+               completion(nil)
+               return
+           }
+
+           let gigURL = baseURL.appendingPathComponent("api/item")
+
+           var request = URLRequest(url: gigURL)
+           request.httpMethod = HTTPMethod.post.rawValue
+           request.addValue("Bearer \(token.token)", forHTTPHeaderField: "Authorization")
+
+           request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+           let encoder = JSONEncoder()
+           encoder.dateEncodingStrategy = .iso8601
+           do {
+               let newItem = try encoder.encode(item)
+               request.httpBody = newItem
+           } catch {
+               print("Error encoding item object: \(error)")
+               completion(nil)
+               return
+           }
+
+           URLSession.shared.dataTask(with: request) { _, response, error in
+               if let response = response as? HTTPURLResponse,
+               response.statusCode == 401 {
+                   print("Bad Auth")
+                   completion(nil)
+                   return
+               }
+
+               if let error = error {
+                   print("Error receiving item data: \(error)")
+                   completion(nil)
+                   return
+               } else {
+                   self.fetchItems { result in
+                   }
+               }
+           }.resume()
+       }
 }

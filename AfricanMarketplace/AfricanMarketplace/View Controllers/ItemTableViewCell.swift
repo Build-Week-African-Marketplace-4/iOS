@@ -27,7 +27,7 @@ class ItemTableViewCell: UITableViewCell {
     private func updateViews() {
         guard let item = item else { return }
         itemName.text = item.name
-        itemPrice.text = String(item.price)
+        itemPrice.text = "\(item.price)"
         itemCity.text = item.city
         itemCountry.text = item.country
     }

@@ -18,6 +18,7 @@ class ItemsViewController: UIViewController {
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var countryTextField: UITextField!
     @IBOutlet weak var categoryTextField: UITextField!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     
     //MARK: - Properties
     
@@ -37,27 +38,27 @@ class ItemsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        updateViews()
     }
     
     //MARK: - Actions
     @IBAction func saveTapped(_ sender: UIBarButtonItem) {
+        
+        guard let priceString = priceTextField.text else { return }
         guard let apiController = apiController,
             let name = nameTextField.text,
-            let description = descriptionTextField.text,
-            let price = priceTextField.text,
+            let price = NumberFormatter().number(from: priceString),
             let city = cityTextField.text,
             let country = countryTextField.text
             else { return }
         
         if var item = item {
             item.name = name
-            item.description = description
-            item.price = price
+            item.price = Int(truncating: price)
             item.city = city
             item.country = country
-            item.description = description
-            apiController.sendItemToServer(item: item) { (error) in
+            item.user_id = 1
+            apiController.add(item: item) { (error) in
                 if let error = error {
                     print("Error adding new item \(error)")
                 }
@@ -69,11 +70,14 @@ class ItemsViewController: UIViewController {
     //MARK: - Methods
     
     private func updateViews() {
-        nameTextField.text = item?.name
-        descriptionTextField.text = item?.description
-        priceTextField.text = item?.price
-        cityTextField.text = item?.city
-        countryTextField.text = item?.country
+        
+        guard let item = item else { return }
+        saveButton.isEnabled = false
+        nameTextField.text = item.name
+        descriptionTextField.text = item.description
+        priceTextField.text = "\(item.price)"
+        cityTextField.text = item.city
+        countryTextField.text = item.country
         
     }
 }
