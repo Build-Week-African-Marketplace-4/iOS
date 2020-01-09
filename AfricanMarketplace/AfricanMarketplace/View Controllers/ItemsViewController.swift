@@ -54,7 +54,7 @@ class ItemsViewController: UIViewController {
         
         if var item = item {
             item.name = name
-            item.price = Int(truncating: price)
+            item.price = Double(truncating: price)
             item.city = city
             item.country = country
             item.user_id = 1

@@ -23,11 +23,53 @@ enum NetworkError: Error {
 
 class UserController {
     
+    static let sharedInstance = UserController()
+    
     private let baseURL = URL(string: "https://africanmarket2.herokuapp.com/")!
     
     var users: [User] = []
     var token: Token?
     var items: [Item] = []
+    var searchedItems: [Item] = []
+    
+    
+    func searchForItem(with searchTerm: String, completion: @escaping (Error?) -> Void) {
+        
+        var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
+        
+        let queryParameters = ["query": searchTerm]
+        
+        components?.queryItems = queryParameters.map({URLQueryItem(name: $0.key, value: $0.value)})
+        
+        let requestURL = baseURL.appendingPathComponent("api/item/search/:\(searchTerm)")
+        
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.dataTask(with: requestURL) { (data, _, error) in
+            if let error = error {
+                NSLog("Error searching for item with search term \(searchTerm): \(error)")
+                completion(error)
+                return
+            }
+            
+            guard let data = data else {
+                NSLog("No data returned from search task")
+                completion(NSError())
+                return
+            }
+            
+            do {
+                let itemQueryResult = try JSONDecoder().decode(SearchedItems.self, from: data).results
+                self.searchedItems = itemQueryResult
+                completion(nil)
+            } catch {
+                NSLog("Error decoding JSON data: \(error)")
+                completion(error)
+            }
+        }.resume()
+    }
     
     func signUp(with user: User, completion: @escaping (Error?) -> ()) {
         
@@ -153,7 +195,6 @@ class UserController {
             }
         }.resume()
     }
-    
     
     func fetchItems(completion: @escaping (Result<[Item], NetworkError>) -> Void) {
 

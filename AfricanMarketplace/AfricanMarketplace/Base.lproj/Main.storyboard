@@ -16,9 +16,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="fqp-iD-jyF">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ItemCell" rowHeight="87" id="iRp-SH-erA" customClass="ItemTableViewCell" customModule="AfricanMarketplace" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="87"/>
+                                <rect key="frame" x="0.0" y="72" width="414" height="87"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iRp-SH-erA" id="yWl-bE-oXY">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="87"/>
@@ -83,11 +88,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Marketplace" id="wzK-mh-cXW">
-                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="6lm-PV-66l">
-                            <connections>
-                                <segue destination="TC3-GQ-VrM" kind="show" identifier="SearchCityShowSegue" id="DJz-Mh-Sau"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="zU0-Ig-2WA">
                             <connections>
                                 <segue destination="Oym-kT-mua" kind="show" identifier="AddItemShowSegue" id="exp-s6-CJq"/>
@@ -99,7 +99,7 @@
                         <attributedString key="attributedTitle">
                             <fragment content="Fetching Items">
                                 <attributes>
-                                    <font key="NSFont" metaFont="message" size="11"/>
+                                    <font key="NSFont" metaFont="controlContent" size="11"/>
                                     <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                 </attributes>
                             </fragment>
@@ -109,6 +109,7 @@
                         </connections>
                     </refreshControl>
                     <connections>
+                        <outlet property="searchBar" destination="fqp-iD-jyF" id="KC0-Fn-fny"/>
                         <segue destination="vOT-yb-bZ9" kind="presentation" identifier="LoginSegue" id="UMX-C8-fz8"/>
                     </connections>
                 </tableViewController>

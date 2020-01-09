@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MarketplaceTableViewController: UITableViewController {
+class MarketplaceTableViewController: UITableViewController, UISearchBarDelegate {
 
     
     //MARK: - Properties
@@ -16,9 +16,14 @@ class MarketplaceTableViewController: UITableViewController {
     private var itemNames: [String] = []
     let apiController = UserController()
     
+    //MARK: - Outlets
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -40,6 +45,18 @@ class MarketplaceTableViewController: UITableViewController {
         apiController.fetchItems() { _ in
             DispatchQueue.main.async {
                 self.refreshControl?.endRefreshing()
+            }
+        }
+    }
+    
+    func searchBarButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchTerm = searchBar.text else { return }
+        
+        apiController.searchForItem(with: searchTerm) { (error) in
+//            guard let error == nil else { return }
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
             }
         }
     }
