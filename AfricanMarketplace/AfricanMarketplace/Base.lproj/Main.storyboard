@@ -99,7 +99,7 @@
                         <attributedString key="attributedTitle">
                             <fragment content="Fetching Items">
                                 <attributes>
-                                    <font key="NSFont" metaFont="controlContent" size="11"/>
+                                    <font key="NSFont" metaFont="message" size="11"/>
                                     <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                 </attributes>
                             </fragment>
@@ -116,22 +116,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ueh-8i-qKt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="898.55072463768124" y="104.46428571428571"/>
-        </scene>
-        <!--Search View Controller-->
-        <scene sceneID="eUf-4D-Alw">
-            <objects>
-                <viewController id="TC3-GQ-VrM" customClass="SearchViewController" customModule="AfricanMarketplace" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Wbj-4g-OpO">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="BKm-Ra-vgb"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="ehy-E2-XEG"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cCL-tP-99n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="566" y="866"/>
         </scene>
         <!--Items View Controller-->
         <scene sceneID="xo7-yn-NYT">

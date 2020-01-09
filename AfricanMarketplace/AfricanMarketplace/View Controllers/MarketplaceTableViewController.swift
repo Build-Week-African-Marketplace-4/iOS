@@ -14,7 +14,7 @@ class MarketplaceTableViewController: UITableViewController, UISearchBarDelegate
     //MARK: - Properties
     
     private var itemNames: [String] = []
-    let apiController = UserController()
+    let apiController = ItemController()
     
     //MARK: - Outlets
     

@@ -34,7 +34,7 @@ class ItemsViewController: UIViewController {
         }
     }
     
-    var apiController: UserController?
+    var apiController: ItemController?
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -21,9 +21,9 @@ enum NetworkError: Error {
     case noDecode
 }
 
-class UserController {
+class ItemController {
     
-    static let sharedInstance = UserController()
+    static let sharedInstance = ItemController()
     
     private let baseURL = URL(string: "https://africanmarket2.herokuapp.com/")!
     
@@ -323,4 +323,8 @@ class UserController {
                }
            }.resume()
        }
+    
+    func deleteItemFromServer(_ item: Item, completion: @escaping (Error?) -> Void = { _ in}) {
+        
+    }
 }

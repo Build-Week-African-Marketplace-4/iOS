@@ -24,7 +24,7 @@ class LoginScreenViewController: UIViewController {
     
     //MARK: - Properties
     
-    var apiController: UserController?
+    var apiController: ItemController?
     var loginType = LoginType.signUp
     
     

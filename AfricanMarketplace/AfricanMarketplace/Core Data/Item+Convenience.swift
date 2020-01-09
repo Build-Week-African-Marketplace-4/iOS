@@ -36,12 +36,4 @@ extension CDItem {
         self.country = country
         self.favorite = favorite
     }
-    
-    @discardableResult convenience init?(itemRepresentation: CDItemRepresentation, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
-        
-        guard let didFavorite = itemRepresentation.favorite else { return nil }
-        
-        self.init(
-    
-    }
 }
