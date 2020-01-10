@@ -46,6 +46,7 @@ class MarketplaceTableViewController: UITableViewController, UISearchBarDelegate
         apiController.fetchItems() { _ in
             DispatchQueue.main.async {
                 self.refreshControl?.endRefreshing()
+                self.tableView.reloadData()
             }
         }
     }
@@ -68,14 +69,14 @@ class MarketplaceTableViewController: UITableViewController, UISearchBarDelegate
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return apiController.items.count
+        return apiController.searchedItems.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as? ItemTableViewCell else { return UITableViewCell() }
 
-        cell.itemRepresentation = apiController.items[indexPath.row]
+        cell.itemRepresentation = apiController.searchedItems[indexPath.row]
         
         return cell
     }
@@ -93,9 +94,11 @@ class MarketplaceTableViewController: UITableViewController, UISearchBarDelegate
             if let loginVC = segue.destination as? ItemsViewController {
                 loginVC.apiController = apiController
             }
-        case "ItemDetailShowDegue":
+        case "ItemDetailShowSegue":
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
             if let loginVC = segue.destination as? ItemsViewController {
                 loginVC.apiController = apiController
+                loginVC.item = apiController.searchedItems[indexPath.row]
             }
         default:
             return

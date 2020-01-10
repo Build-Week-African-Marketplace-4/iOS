@@ -17,18 +17,11 @@ class ItemsViewController: UIViewController {
     @IBOutlet weak var priceTextField: UITextField!
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var countryTextField: UITextField!
-    @IBOutlet weak var categoryTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
     //MARK: - Properties
     
     var item: CDItemRepresentation? {
-        didSet {
-            updateViews()
-        }
-    }
-    
-    var categoryObj: Category? {
         didSet {
             updateViews()
         }
@@ -73,7 +66,8 @@ class ItemsViewController: UIViewController {
     
     private func updateViews() {
         
-        guard let item = item else { return }
+        guard let item = item,
+                isViewLoaded else { return }
         saveButton.isEnabled = false
         nameTextField.text = item.name
         descriptionTextField.text = item.description

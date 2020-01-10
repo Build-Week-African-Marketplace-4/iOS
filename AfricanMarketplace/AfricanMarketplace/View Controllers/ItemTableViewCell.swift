@@ -16,7 +16,7 @@ class ItemTableViewCell: UITableViewCell {
     @IBOutlet weak var itemCity: UILabel!
     @IBOutlet weak var itemCountry: UILabel!
     
-    var itemRepresentation: CDItem? {
+    var itemRepresentation: CDItemRepresentation? {
         didSet {
             updateViews()
         }

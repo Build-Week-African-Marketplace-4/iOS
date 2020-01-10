@@ -245,20 +245,15 @@ class ItemController {
     
     func fetchItems(completion: @escaping (Result<[CDItemRepresentation], NetworkError>) -> Void) {
 
-        let gigURL = baseURL.appendingPathComponent("api/item")
+        let itemURL = baseURL.appendingPathComponent("api/item")
 
-        var request = URLRequest(url: gigURL)
+        var request = URLRequest(url: itemURL)
         request.httpMethod = HTTPMethod.get.rawValue
 
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let response = response as? HTTPURLResponse,
-            response.statusCode == 401 {
-                completion(.failure(.badAuth))
-                return
-            }
+        URLSession.shared.dataTask(with: request) { data, _, error in
 
             if let error = error {
-                print("Error receiving gig data: \(error)")
+                print("Error receiving item data: \(error)")
                 completion(.failure(.otherError))
             }
 
@@ -328,18 +323,12 @@ class ItemController {
     }
     
     func add(item: CDItemRepresentation, completion: @escaping (Error?) -> ()) {
-           guard let token = token else {
-               print("No Auth")
-               completion(nil)
-               return
-           }
+
 
            let gigURL = baseURL.appendingPathComponent("api/item")
 
            var request = URLRequest(url: gigURL)
            request.httpMethod = HTTPMethod.post.rawValue
-           request.addValue("Bearer \(token.token)", forHTTPHeaderField: "Authorization")
-
            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
            let encoder = JSONEncoder()
@@ -384,7 +373,7 @@ class ItemController {
         var entriesToCreate = representationByID
 
         let fetchRequest: NSFetchRequest<CDItem> = CDItem.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "identifier IN %@", identifiersToFetch)
+        fetchRequest.predicate = NSPredicate(format: "item_id IN %@", identifiersToFetch)
 
         let context = CoreDataStack.shared.container.newBackgroundContext()
         context.perform {
