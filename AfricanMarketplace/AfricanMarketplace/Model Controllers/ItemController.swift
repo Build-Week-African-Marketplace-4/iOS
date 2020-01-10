@@ -43,13 +43,7 @@ class ItemController {
     
     
     func searchForItem(with searchTerm: String, completion: @escaping (Error?) -> Void) {
-        
-        var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
-        
-        let queryParameters = ["query": searchTerm]
-        
-        components?.queryItems = queryParameters.map({URLQueryItem(name: $0.key, value: $0.value)})
-        
+                
         let requestURL = baseURL.appendingPathComponent("api/item/search/:\(searchTerm)")
         
         var request = URLRequest(url: requestURL)
@@ -325,9 +319,9 @@ class ItemController {
     func add(item: CDItemRepresentation, completion: @escaping (Error?) -> ()) {
 
 
-           let gigURL = baseURL.appendingPathComponent("api/item")
+           let itemURL = baseURL.appendingPathComponent("api/item")
 
-           var request = URLRequest(url: gigURL)
+           var request = URLRequest(url: itemURL)
            request.httpMethod = HTTPMethod.post.rawValue
            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 

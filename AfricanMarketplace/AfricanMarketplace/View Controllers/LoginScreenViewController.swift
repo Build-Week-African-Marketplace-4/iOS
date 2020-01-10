@@ -79,6 +79,7 @@ class LoginScreenViewController: UIViewController {
         if sender.selectedSegmentIndex == 0 {
             loginType = .signUp
             signInUpButton.setTitle("Sign Up", for: .normal)
+            emailTextField.isHidden = false
         } else {
             emailTextField.isHidden = true
             loginType = .signIn

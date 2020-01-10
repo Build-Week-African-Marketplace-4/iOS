@@ -274,11 +274,21 @@
                                     <constraint firstAttribute="trailing" secondItem="FI2-MZ-L7v" secondAttribute="trailing" constant="8" id="iEZ-LN-6dY"/>
                                 </constraints>
                             </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="metin-ozer-8leM_6kABXo-unsplash" translatesAutoresizingMaskIntoConstraints="NO" id="L4M-CI-2WV">
+                                <rect key="frame" x="0.0" y="280" width="414" height="528"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="L4M-CI-2WV" secondAttribute="height" multiplier="69:88" id="UIm-MB-oKk"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="U6K-WJ-fiJ" firstAttribute="bottom" secondItem="L4M-CI-2WV" secondAttribute="bottom" id="282-RZ-7aK"/>
+                            <constraint firstItem="L4M-CI-2WV" firstAttribute="top" secondItem="UPl-uF-XuU" secondAttribute="bottom" constant="8" id="ZwI-Yb-oEH"/>
                             <constraint firstItem="UPl-uF-XuU" firstAttribute="top" secondItem="U6K-WJ-fiJ" secondAttribute="top" id="bS6-Sr-BtI"/>
+                            <constraint firstItem="U6K-WJ-fiJ" firstAttribute="trailing" secondItem="L4M-CI-2WV" secondAttribute="trailing" id="eZ8-IA-B9B"/>
                             <constraint firstItem="U6K-WJ-fiJ" firstAttribute="trailing" secondItem="UPl-uF-XuU" secondAttribute="trailing" id="hfW-lL-xqJ"/>
+                            <constraint firstItem="L4M-CI-2WV" firstAttribute="leading" secondItem="U6K-WJ-fiJ" secondAttribute="leading" id="uV2-O2-LZu"/>
                             <constraint firstItem="UPl-uF-XuU" firstAttribute="leading" secondItem="U6K-WJ-fiJ" secondAttribute="leading" id="wFj-bg-4T9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="U6K-WJ-fiJ"/>
@@ -381,6 +391,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="metin-ozer-8leM_6kABXo-unsplash" width="5184" height="3456"/>
         <image name="star" catalog="system" width="64" height="58"/>
         <image name="star.fill" catalog="system" width="64" height="58"/>
     </resources>

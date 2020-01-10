@@ -43,22 +43,20 @@ class ItemsViewController: UIViewController {
             let price = NumberFormatter().number(from: priceString),
             let city = cityTextField.text,
             let country = countryTextField.text,
-            let item_id = item?.item_id
+            let item_id = item?.item_id,
+            let description = descriptionTextField.text
             else { return }
         
-        if var item = item {
-            item.name = name
-            item.price = Double(truncating: price)
-            item.city = city
-            item.country = country
-            item.item_id = item_id
-            apiController.add(item: item) { (error) in
-                if let error = error {
-                    print("Error adding new item \(error)")
-                }
+        let newItem = CDItemRepresentation(name: name, description: description, price: Double(truncating: price), city: city, country: country, favorite: false, item_id: item_id)
+        
+        apiController.add(item: newItem, completion: { error in
+            if let error = error {
+                print("Error adding new item \(error)")
             }
+        })
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
         }
-        navigationController?.popViewController(animated: true)
     }
     
     

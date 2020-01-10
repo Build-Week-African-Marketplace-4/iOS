@@ -56,7 +56,6 @@ class MarketplaceTableViewController: UITableViewController, UISearchBarDelegate
         
         apiController.searchForItem(with: searchTerm) { (error) in
 //            guard let error == nil else { return }
-            
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
