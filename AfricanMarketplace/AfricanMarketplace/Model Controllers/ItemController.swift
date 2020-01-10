@@ -30,8 +30,8 @@ class ItemController {
     
     var users: [User] = []
     var token: Token?
-    var items: [Item] = []
-    var searchedItems: [Item] = []
+    var items: [CDItem] = []
+    var searchedItems: [CDItemRepresentation] = []
     
     init() {
         fetchItems()
@@ -66,7 +66,7 @@ class ItemController {
             }
             
             do {
-                let itemQueryResult = try JSONDecoder().decode(SearchedItems.self, from: data).results
+                let itemQueryResult = try JSONDecoder().decode(CDItemRepresentations.self, from: data).results
                 self.searchedItems = itemQueryResult
                 completion(nil)
             } catch {
@@ -134,7 +134,7 @@ class ItemController {
                 return
             }
             
-            if let response = response as? HTTPURLResponse, response.statusCode != 200 {
+            if let response = response as? HTTPURLResponse, response.statusCode != 200 || response.statusCode != 201 {
                 completion(NSError(domain: "", code: response.statusCode, userInfo: nil))
                 return
             }
@@ -239,7 +239,7 @@ class ItemController {
         }.resume()
     }
     
-    func sendItemToServer(item: Item, completion: @escaping (Error?) -> ()) {
+    func sendItemToServer(item: CDItemRepresentation, completion: @escaping (Error?) -> ()) {
         guard let token = token else {
             print("Error Authenticating")
             completion(nil)
@@ -285,7 +285,7 @@ class ItemController {
         
     }
     
-    func add(item: Item, completion: @escaping (Error?) -> ()) {
+    func add(item: CDItemRepresentation, completion: @escaping (Error?) -> ()) {
            guard let token = token else {
                print("No Auth")
                completion(nil)
@@ -330,7 +330,7 @@ class ItemController {
            }.resume()
        }
     
-    func deleteItemFromServer(_ item: Item, completion: @escaping (Error?) -> Void = { _ in}) {
+    func deleteItemFromServer(_ item: CDItemRepresentation, completion: @escaping (Error?) -> Void = { _ in}) {
         
     }
     

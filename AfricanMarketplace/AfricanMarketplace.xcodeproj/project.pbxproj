@@ -13,7 +13,6 @@
 		DB26485123C38E090053E015 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB26485023C38E090053E015 /* Assets.xcassets */; };
 		DB26485423C38E090053E015 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB26485223C38E090053E015 /* LaunchScreen.storyboard */; };
 		DB26486423C39EBF0053E015 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26486323C39EBF0053E015 /* User.swift */; };
-		DB26486923C3A0D70053E015 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26486823C3A0D70053E015 /* Items.swift */; };
 		DB26486B23C3A1B80053E015 /* ItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26486A23C3A1B80053E015 /* ItemController.swift */; };
 		DB26486F23C3AACE0053E015 /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26486E23C3AACE0053E015 /* ItemsViewController.swift */; };
 		DB26487323C3AB040053E015 /* MarketplaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26487223C3AB040053E015 /* MarketplaceTableViewController.swift */; };
@@ -24,6 +23,7 @@
 		DBE9546B23C7C4CF00B6A36B /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE9546A23C7C4CF00B6A36B /* CoreDataStack.swift */; };
 		DBE9546D23C7C51300B6A36B /* Item+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE9546C23C7C51300B6A36B /* Item+Convenience.swift */; };
 		DBE9547023C7C9B700B6A36B /* CDItemRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE9546F23C7C9B700B6A36B /* CDItemRepresentation.swift */; };
+		DBE9547223C7FD2B00B6A36B /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE9547123C7FD2B00B6A36B /* FavoritesTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +35,6 @@
 		DB26485323C38E090053E015 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB26485523C38E090053E015 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB26486323C39EBF0053E015 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		DB26486823C3A0D70053E015 /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
 		DB26486A23C3A1B80053E015 /* ItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemController.swift; sourceTree = "<group>"; };
 		DB26486E23C3AACE0053E015 /* ItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
 		DB26487223C3AB040053E015 /* MarketplaceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketplaceTableViewController.swift; sourceTree = "<group>"; };
@@ -46,6 +45,7 @@
 		DBE9546A23C7C4CF00B6A36B /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		DBE9546C23C7C51300B6A36B /* Item+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+Convenience.swift"; sourceTree = "<group>"; };
 		DBE9546F23C7C9B700B6A36B /* CDItemRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDItemRepresentation.swift; sourceTree = "<group>"; };
+		DBE9547123C7FD2B00B6A36B /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +107,7 @@
 				DB26487223C3AB040053E015 /* MarketplaceTableViewController.swift */,
 				DB26487623C3B2490053E015 /* LoginScreenViewController.swift */,
 				DB26487823C3B78C0053E015 /* ItemTableViewCell.swift */,
+				DBE9547123C7FD2B00B6A36B /* FavoritesTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -123,7 +124,6 @@
 			isa = PBXGroup;
 			children = (
 				DB26486323C39EBF0053E015 /* User.swift */,
-				DB26486823C3A0D70053E015 /* Items.swift */,
 				DB26487423C3ADBA0053E015 /* Token.swift */,
 				DBE9546F23C7C9B700B6A36B /* CDItemRepresentation.swift */,
 			);
@@ -213,7 +213,7 @@
 			files = (
 				DB26486B23C3A1B80053E015 /* ItemController.swift in Sources */,
 				DB26484823C38E090053E015 /* AppDelegate.swift in Sources */,
-				DB26486923C3A0D70053E015 /* Items.swift in Sources */,
+				DBE9547223C7FD2B00B6A36B /* FavoritesTableViewController.swift in Sources */,
 				DBE9546D23C7C51300B6A36B /* Item+Convenience.swift in Sources */,
 				DBE9546923C7C47700B6A36B /* Item.xcdatamodeld in Sources */,
 				DB26484A23C38E090053E015 /* SceneDelegate.swift in Sources */,

@@ -22,7 +22,7 @@ class ItemsViewController: UIViewController {
     
     //MARK: - Properties
     
-    var item: Item? {
+    var item: CDItemRepresentation? {
         didSet {
             updateViews()
         }
@@ -49,7 +49,8 @@ class ItemsViewController: UIViewController {
             let name = nameTextField.text,
             let price = NumberFormatter().number(from: priceString),
             let city = cityTextField.text,
-            let country = countryTextField.text
+            let country = countryTextField.text,
+            let item_id = item?.item_id
             else { return }
         
         if var item = item {
@@ -57,7 +58,7 @@ class ItemsViewController: UIViewController {
             item.price = Double(truncating: price)
             item.city = city
             item.country = country
-            item.user_id = 1
+            item.item_id = item_id
             apiController.add(item: item) { (error) in
                 if let error = error {
                     print("Error adding new item \(error)")

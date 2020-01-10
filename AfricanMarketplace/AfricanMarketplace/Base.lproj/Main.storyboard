@@ -88,6 +88,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Marketplace" id="wzK-mh-cXW">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="star.fill" catalog="system" id="420-i4-L4x">
+                            <connections>
+                                <segue destination="OSQ-xK-2Wf" kind="show" identifier="FavoriteTappedShowSegue" id="RBt-0M-phR"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="zU0-Ig-2WA">
                             <connections>
                                 <segue destination="Oym-kT-mua" kind="show" identifier="AddItemShowSegue" id="exp-s6-CJq"/>
@@ -95,6 +100,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Nsg-oh-LjT">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <attributedString key="attributedTitle">
                             <fragment content="Fetching Items">
@@ -117,7 +123,7 @@
             </objects>
             <point key="canvasLocation" x="898.55072463768124" y="104.46428571428571"/>
         </scene>
-        <!--Items View Controller-->
+        <!--Items-->
         <scene sceneID="xo7-yn-NYT">
             <objects>
                 <viewController id="Oym-kT-mua" customClass="ItemsViewController" customModule="AfricanMarketplace" customModuleProvider="target" sceneMemberID="viewController">
@@ -205,7 +211,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="f3f-zI-b9o"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Zsf-ab-4E1">
+                    <navigationItem key="navigationItem" title="Items" id="Zsf-ab-4E1">
                         <barButtonItem key="rightBarButtonItem" title="Save" id="jQD-Fo-vu9">
                             <connections>
                                 <action selector="saveTapped:" destination="Oym-kT-mua" id="k1z-zX-ygG"/>
@@ -301,6 +307,35 @@
             </objects>
             <point key="canvasLocation" x="1758" y="104"/>
         </scene>
+        <!--Favorites-->
+        <scene sceneID="iLe-IJ-ayO">
+            <objects>
+                <tableViewController id="OSQ-xK-2Wf" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="GUR-HE-qxl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="RDJ-0h-2Cl">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RDJ-0h-2Cl" id="eho-wn-QBB">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="OSQ-xK-2Wf" id="YNu-NE-hXm"/>
+                            <outlet property="delegate" destination="OSQ-xK-2Wf" id="eji-Tv-E6x"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Favorites" id="4KK-h6-Hbh"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K7i-Fj-h6U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="899" y="-580"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="sC5-ap-Sc5">
             <objects>
@@ -318,6 +353,9 @@
             <point key="canvasLocation" x="-21" y="105"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="star.fill" catalog="system" width="64" height="58"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Vcf-OQ-Qzw"/>
     </inferredMetricsTieBreakers>
