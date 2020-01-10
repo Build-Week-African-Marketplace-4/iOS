@@ -19,14 +19,20 @@ extension CDItem {
               let country = country else { return nil }
         
         let itemPrice = price
-        let didFavorite = favorite
         
-        return CDItemRepresentation(name: name, description: description, price: itemPrice, city: city, country: country, favorite: didFavorite)
+        return CDItemRepresentation(name: name, description: description, price: itemPrice, city: city, country: country, favorite: favorite, item_id: item_id)
     }
     
     //MARK: - Convenience Inits
     
-    convenience init(name: String, description: String, price: Double, city: String, country: String, favorite: Bool = false, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+    convenience init(name: String,
+                     description: String,
+                     price: Double,
+                     city: String,
+                     country: String,
+                     favorite: Bool = false,
+                     item_id: UUID = UUID(),
+                     context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         
         self.init(context: context)
         self.name = name
@@ -35,5 +41,16 @@ extension CDItem {
         self.city = city
         self.country = country
         self.favorite = favorite
+        self.item_id = item_id
+    }
+    
+    @discardableResult convenience init?(itemRepresentation: CDItemRepresentation, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+
+        guard let identifier = itemRepresentation.item_id,
+            let favorited = itemRepresentation.favorite else { return nil }
+        
+        self.init(name: itemRepresentation.name,
+                  item_id: item_id,
+                  favorite: favorited
     }
 }

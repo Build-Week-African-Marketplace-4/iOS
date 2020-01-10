@@ -16,7 +16,7 @@ class ItemTableViewCell: UITableViewCell {
     @IBOutlet weak var itemCity: UILabel!
     @IBOutlet weak var itemCountry: UILabel!
     
-    var item: Item? {
+    var itemRepresentation: CDItem? {
         didSet {
             updateViews()
         }
@@ -25,7 +25,7 @@ class ItemTableViewCell: UITableViewCell {
     //MARK: - Methods
     
     private func updateViews() {
-        guard let item = item else { return }
+        guard let item = itemRepresentation else { return }
         itemName.text = item.name
         itemPrice.text = "\(item.price)"
         itemCity.text = item.city

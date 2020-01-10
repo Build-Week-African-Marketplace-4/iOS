@@ -64,6 +64,7 @@ class ItemsViewController: UIViewController {
                 }
             }
         }
+        navigationController?.popViewController(animated: true)
     }
     
     

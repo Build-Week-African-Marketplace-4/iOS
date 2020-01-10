@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 enum HTTPMethod: String {
     case get = "GET"
@@ -31,6 +32,10 @@ class ItemController {
     var token: Token?
     var items: [Item] = []
     var searchedItems: [Item] = []
+    
+    init() {
+        fetchItems()
+    }
     
     
     func searchForItem(with searchTerm: String, completion: @escaping (Error?) -> Void) {
@@ -196,39 +201,40 @@ class ItemController {
         }.resume()
     }
     
-    func fetchItems(completion: @escaping (Result<[Item], NetworkError>) -> Void) {
+    func fetchItems(completion: @escaping (Error?) -> Void = { _ in}) {
 
         let itemsURL = baseURL.appendingPathComponent("api/item")
-
+        
         var request = URLRequest(url: itemsURL)
-        request.httpMethod = HTTPMethod.get.rawValue
-
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let response = response as? HTTPURLResponse,
-            response.statusCode == 401 {
-                completion(.failure(.badAuth))
-                return
-            }
-
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
-                print("Error receiving item data: \(error)")
-                completion(.failure(.otherError))
-            }
-
-            guard let data = data else {
-                completion(.failure(.badData))
+                print("Error fetching items: \(error)")
+                DispatchQueue.main.async {
+                    completion(error)
+                }
                 return
             }
-
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .iso8601
+            
+            guard let data = data else {
+                print("No data returned in fetch")
+                DispatchQueue.main.async {
+                    completion(NSError())
+                }
+                return
+            }
+            
             do {
-                let items = try decoder.decode([Item].self, from: data)
-                self.items = items
-                completion(.success(items))
+                let itemRepresentations = Array(try JSONDecoder().decode([String: CDItemRepresentation].self, from: data).values)
+                try self.updateItems(with: itemRepresentations)
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
             } catch {
-                print("Error decoding item object: \(error)")
-                completion(.failure(.noDecode))
+                print("Error decoding item representation: \(error)")
+                completion(error)
+                return
             }
         }.resume()
     }
@@ -327,4 +333,49 @@ class ItemController {
     func deleteItemFromServer(_ item: Item, completion: @escaping (Error?) -> Void = { _ in}) {
         
     }
+    
+    func updateItems(with representation: [CDItemRepresentation]) throws {
+        let entriesWithId = representation.filter { $0.item_id != nil }
+        let identifiersToFetch = entriesWithId.compactMap { $0.item_id! }
+        let representationByID = Dictionary(uniqueKeysWithValues: zip(identifiersToFetch, entriesWithId))
+
+        var entriesToCreate = representationByID
+
+        let fetchRequest: NSFetchRequest<CDItem> = CDItem.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "identifier IN %@", identifiersToFetch)
+
+        let context = CoreDataStack.shared.container.newBackgroundContext()
+        context.perform {
+            do {
+                let existingItems = try context.fetch(fetchRequest)
+
+                for item in existingItems {
+                    guard let id = item.item_id,
+                        let representation = representationByID[id] else { continue }
+
+                    self.update(item: item, with: representation)
+                    entriesToCreate.removeValue(forKey: id)
+                }
+
+                for representation in entriesToCreate.values {
+                    CDItem(itemRepresentation: representation, context: context)
+                }
+            } catch {
+                print("Error fetching entries for UUIDs: \(error)")
+            }
+        }
+        try CoreDataStack.shared.save(context: context)
+    }
+    
+    private func update(item: CDItem, with representation: CDItemRepresentation) {
+        item.name = representation.name
+        item.price = representation.price
+        item.city = representation.city
+        item.country = representation.country
+        item.itemDescription = representation.description
+        item.favorite = representation.favorite ?? false
+    }
+    
+    
+    
 }

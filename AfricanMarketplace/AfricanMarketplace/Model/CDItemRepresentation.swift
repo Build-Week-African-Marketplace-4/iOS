@@ -15,7 +15,7 @@ struct CDItemRepresentation: Codable, Equatable {
     var city: String
     var country: String
     var favorite: Bool?
-    var identifier: UUID?
+    var item_id: UUID?
 }
 
 struct CDItemRepresentations: Codable {
