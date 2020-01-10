@@ -10,15 +10,35 @@ import UIKit
 
 class FavoritesTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    //MARK: - Outlets
+    
+    @IBOutlet weak var itemName: UILabel!
+    @IBOutlet weak var itemPrice: UILabel!
+    @IBOutlet weak var favoriteButton: UIButton!
+    
+    
+    //MARK: - Properties
+
+  var itemRepresentation: CDItem? {
+        didSet {
+            updateViews()
+        }
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    //MARK: - Methods
+    
+    private func updateViews() {
+        guard let item = itemRepresentation else { return }
+        itemName.text = item.name
+        itemPrice.text = "\(item.price)"
+        
+        if let favorited = itemRepresentation?.favorite {
+            if favorited == true {
+                favoriteButton.isHighlighted = true
+            } else {
+                favoriteButton.isHighlighted = false
+            }
+        }
+        
     }
-
 }

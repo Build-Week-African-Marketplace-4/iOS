@@ -34,7 +34,11 @@ class ItemController {
     var searchedItems: [CDItemRepresentation] = []
     
     init() {
-        fetchItems()
+        fetchItems { (result) in
+            DispatchQueue.main.async {
+                
+            }
+        }
     }
     
     
@@ -134,7 +138,7 @@ class ItemController {
                 return
             }
             
-            if let response = response as? HTTPURLResponse, response.statusCode != 200 || response.statusCode != 201 {
+            if let response = response as? HTTPURLResponse, response.statusCode != 200 {
                 completion(NSError(domain: "", code: response.statusCode, userInfo: nil))
                 return
             }
@@ -201,7 +205,7 @@ class ItemController {
         }.resume()
     }
     
-    func fetchItems(completion: @escaping (Error?) -> Void = { _ in}) {
+    func fetchItem(completion: @escaping (Error?) -> Void = { _ in}) {
 
         let itemsURL = baseURL.appendingPathComponent("api/item")
         
@@ -235,6 +239,44 @@ class ItemController {
                 print("Error decoding item representation: \(error)")
                 completion(error)
                 return
+            }
+        }.resume()
+    }
+    
+    func fetchItems(completion: @escaping (Result<[CDItemRepresentation], NetworkError>) -> Void) {
+
+        let gigURL = baseURL.appendingPathComponent("api/item")
+
+        var request = URLRequest(url: gigURL)
+        request.httpMethod = HTTPMethod.get.rawValue
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let response = response as? HTTPURLResponse,
+            response.statusCode == 401 {
+                completion(.failure(.badAuth))
+                return
+            }
+
+            if let error = error {
+                print("Error receiving gig data: \(error)")
+                completion(.failure(.otherError))
+            }
+
+            guard let data = data else {
+                completion(.failure(.badData))
+                return
+            }
+
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            do {
+                let items = try decoder.decode([CDItemRepresentation].self, from: data)
+                self.searchedItems = items
+                completion(.success(items))
+                try self.updateItems(with: items)
+            } catch {
+                print("Error decoding [Item] object: \(error)")
+                completion(.failure(.noDecode))
             }
         }.resume()
     }
@@ -365,6 +407,47 @@ class ItemController {
             }
         }
         try CoreDataStack.shared.save(context: context)
+    }
+    
+    func put(item: CDItem, completion: @escaping (Error?) -> Void = { _ in }) {
+        let uuid = item.item_id ?? UUID()
+        let requestURL = baseURL.appendingPathComponent(uuid.uuidString).appendingPathExtension("json")
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = "PUT"
+
+        do {
+            guard var representation = item.cdItemRepresentation else {
+                completion(NSError())
+                return
+            }
+            representation.item_id = uuid
+            item.item_id = uuid
+            try CoreDataStack.shared.save()
+            request.httpBody = try JSONEncoder().encode(representation)
+        } catch {
+            print("Error encoding movie: \(error)")
+            completion(error)
+            return
+        }
+
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            if let error = error {
+                print("Error putting item to server \(error)")
+                completion(error)
+                return
+            }
+            completion(nil)
+        }.resume()
+    }
+    
+    func hasFavorited(for item: CDItem) {
+        item.favorite.toggle()
+        put(item: item)
+        do {
+            try CoreDataStack.shared.save(context: CoreDataStack.shared.mainContext)
+        } catch {
+            print("Error updating favorite status \(error)")
+        }
     }
     
     private func update(item: CDItem, with representation: CDItemRepresentation) {

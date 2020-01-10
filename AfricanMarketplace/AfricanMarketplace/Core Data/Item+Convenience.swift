@@ -18,15 +18,13 @@ extension CDItem {
               let city = city,
               let country = country else { return nil }
         
-        let itemPrice = price
-        
-        return CDItemRepresentation(name: name, description: description, price: itemPrice, city: city, country: country, favorite: favorite, item_id: item_id)
+        return CDItemRepresentation(name: name, description: description, price: price, city: city, country: country, favorite: favorite, item_id: item_id)
     }
     
     //MARK: - Convenience Inits
     
     convenience init(name: String,
-                     description: String,
+                     itemDescription: String,
                      price: Double,
                      city: String,
                      country: String,
@@ -36,7 +34,7 @@ extension CDItem {
         
         self.init(context: context)
         self.name = name
-        self.itemDescription = description
+        self.itemDescription = itemDescription
         self.price = price
         self.city = city
         self.country = country
@@ -50,7 +48,11 @@ extension CDItem {
             let favorited = itemRepresentation.favorite else { return nil }
         
         self.init(name: itemRepresentation.name,
-                  item_id: item_id,
-                  favorite: favorited
+                  itemDescription: itemRepresentation.description,
+                  price: itemRepresentation.price,
+                  city: itemRepresentation.city,
+                  country: itemRepresentation.country,
+                  favorite: favorited,
+                  item_id: identifier)
     }
 }

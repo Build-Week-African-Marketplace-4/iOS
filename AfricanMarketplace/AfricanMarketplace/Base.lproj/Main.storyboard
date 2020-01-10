@@ -105,7 +105,7 @@
                         <attributedString key="attributedTitle">
                             <fragment content="Fetching Items">
                                 <attributes>
-                                    <font key="NSFont" metaFont="controlContent" size="11"/>
+                                    <font key="NSFont" metaFont="label" size="11"/>
                                     <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                 </attributes>
                             </fragment>
@@ -345,8 +345,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <state key="normal" title="Button" image="star" catalog="system"/>
                                             <connections>
-                                                <action selector="favoriteTapped:" destination="RDJ-0h-2Cl" eventType="touchUpInside" id="39r-RE-Pf0"/>
-                                                <action selector="favoriteTapped:" destination="OSQ-xK-2Wf" eventType="touchUpInside" id="ju4-nR-Z4S"/>
+                                                <action selector="favoriteTapped:" destination="OSQ-xK-2Wf" eventType="touchUpInside" id="Jho-xc-Vsn"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -359,7 +358,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="favoriteButton" destination="uSr-0D-ldL" id="8Pt-5P-PaL"/>
+                                    <outlet property="favoriteButton" destination="uSr-0D-ldL" id="aAQ-9X-6n6"/>
                                     <outlet property="itemName" destination="Gzy-bD-M8u" id="qQo-L3-jPa"/>
                                     <outlet property="itemPrice" destination="dr8-Mz-0Ng" id="oEp-Kb-Vmv"/>
                                 </connections>
@@ -371,9 +370,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Favorites" id="4KK-h6-Hbh"/>
-                    <connections>
-                        <outlet property="favoriteButton" destination="uSr-0D-ldL" id="dnk-Xj-5kM"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K7i-Fj-h6U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
