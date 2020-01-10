@@ -105,7 +105,7 @@
                         <attributedString key="attributedTitle">
                             <fragment content="Fetching Items">
                                 <attributes>
-                                    <font key="NSFont" metaFont="message" size="11"/>
+                                    <font key="NSFont" metaFont="controlContent" size="11"/>
                                     <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                 </attributes>
                             </fragment>
@@ -310,19 +310,59 @@
         <!--Favorites-->
         <scene sceneID="iLe-IJ-ayO">
             <objects>
-                <tableViewController id="OSQ-xK-2Wf" sceneMemberID="viewController">
+                <tableViewController id="OSQ-xK-2Wf" customClass="FavoritesTableViewController" customModule="AfricanMarketplace" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="GUR-HE-qxl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="RDJ-0h-2Cl">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoriteCell" rowHeight="86" id="RDJ-0h-2Cl" customClass="FavoritesTableViewCell" customModule="AfricanMarketplace" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="86"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RDJ-0h-2Cl" id="eho-wn-QBB">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="86"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="DEg-Zq-S7W">
+                                            <rect key="frame" x="20" y="13" width="52.5" height="69"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gzy-bD-M8u">
+                                                    <rect key="frame" x="0.0" y="0.0" width="52.5" height="26.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dr8-Mz-0Ng">
+                                                    <rect key="frame" x="0.0" y="42.5" width="52.5" height="26.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uSr-0D-ldL">
+                                            <rect key="frame" x="323" y="22" width="63" height="20"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <state key="normal" title="Button" image="star" catalog="system"/>
+                                            <connections>
+                                                <action selector="favoriteTapped:" destination="RDJ-0h-2Cl" eventType="touchUpInside" id="39r-RE-Pf0"/>
+                                                <action selector="favoriteTapped:" destination="OSQ-xK-2Wf" eventType="touchUpInside" id="ju4-nR-Z4S"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="uSr-0D-ldL" firstAttribute="top" secondItem="eho-wn-QBB" secondAttribute="topMargin" constant="11" id="K19-xG-oI0"/>
+                                        <constraint firstItem="uSr-0D-ldL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DEg-Zq-S7W" secondAttribute="trailing" constant="8" id="LIF-B5-oTm"/>
+                                        <constraint firstItem="DEg-Zq-S7W" firstAttribute="top" secondItem="eho-wn-QBB" secondAttribute="topMargin" constant="2" id="jkO-8V-mBE"/>
+                                        <constraint firstItem="DEg-Zq-S7W" firstAttribute="leading" secondItem="eho-wn-QBB" secondAttribute="leadingMargin" id="m5K-1I-M0m"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="uSr-0D-ldL" secondAttribute="trailing" constant="8" id="ofM-Fq-P2m"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="favoriteButton" destination="uSr-0D-ldL" id="8Pt-5P-PaL"/>
+                                    <outlet property="itemName" destination="Gzy-bD-M8u" id="qQo-L3-jPa"/>
+                                    <outlet property="itemPrice" destination="dr8-Mz-0Ng" id="oEp-Kb-Vmv"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -331,10 +371,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Favorites" id="4KK-h6-Hbh"/>
+                    <connections>
+                        <outlet property="favoriteButton" destination="uSr-0D-ldL" id="dnk-Xj-5kM"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K7i-Fj-h6U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="899" y="-580"/>
+            <point key="canvasLocation" x="898.55072463768124" y="-580.58035714285711"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sC5-ap-Sc5">
@@ -354,6 +397,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="star" catalog="system" width="64" height="58"/>
         <image name="star.fill" catalog="system" width="64" height="58"/>
     </resources>
     <inferredMetricsTieBreakers>
